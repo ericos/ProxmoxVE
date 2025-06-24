@@ -67,9 +67,9 @@ cd /root
 curl -fsSL "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz" -o "/root/mysql-connector-java-8.0.26.tar.gz"
 $STD tar -xf ~/mysql-connector-java-8.0.26.tar.gz
 mv ~/mysql-connector-java-8.0.26/mysql-connector-java-8.0.26.jar /etc/guacamole/lib/
-curl -fsSL "https://downloads.apache.org/guacamole/1.5.5/binary/guacamole-auth-jdbc-1.5.5.tar.gz" -o "/root/guacamole-auth-jdbc-1.5.5.tar.gz"
-$STD tar -xf ~/guacamole-auth-jdbc-1.5.5.tar.gz
-mv ~/guacamole-auth-jdbc-1.5.5/mysql/guacamole-auth-jdbc-mysql-1.5.5.jar /etc/guacamole/extensions/
+curl -fsSL "https://downloads.apache.org/guacamole/1.6.0/binary/guacamole-auth-jdbc-1.6.0.tar.gz" -o "/root/guacamole-auth-jdbc-1.6.0.tar.gz"
+$STD tar -xf ~/guacamole-auth-jdbc-1.6.0.tar.gz
+mv ~/guacamole-auth-jdbc-1.6.0/mysql/guacamole-auth-jdbc-mysql-1.6.0.jar /etc/guacamole/extensions/
 msg_ok "Setup Apache Guacamole"
 
 msg_info "Setup Database"
@@ -85,7 +85,7 @@ $STD mariadb -u root -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost'; FLUS
   echo "Database Password: $DB_PASS"
   echo "Database Name: $DB_NAME"
 } >>~/guacamole.creds
-cd guacamole-auth-jdbc-1.5.5/mysql/schema
+cd guacamole-auth-jdbc-1.6.0/mysql/schema
 cat *.sql | mariadb -u root ${DB_NAME}
 {
   echo "mysql-hostname: 127.0.0.1"
@@ -148,7 +148,7 @@ customize
 
 msg_info "Cleaning up"
 rm -rf ~/mysql-connector-java-8.0.26{,.tar.gz}
-rm -rf ~/guacamole-auth-jdbc-1.5.5{,.tar.gz}
+rm -rf ~/guacamole-auth-jdbc-1.6.0{,.tar.gz}
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"
